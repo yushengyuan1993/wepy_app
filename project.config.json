@@ -5,7 +5,8 @@
 		"es6": false,
 		"postcss": false,
 		"minified": false,
-		"newFeature": true
+		"newFeature": true,
+		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
 	"appid": "wx901fb2f13d6ffbc8",

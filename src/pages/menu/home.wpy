@@ -1,6 +1,7 @@
 <template>
   <view class="home">
     <div>我的</div>
+    <div>你的</div>
     <van-tabbar active="{{ active }}" bind:change="onChange">
       <van-tabbar-item>
         <span>首页</span>
@@ -71,5 +72,12 @@
   }
 </script>
 <style lang="less">
-  
+  .home {
+    >div {
+      color: #f00;
+      &:last-of-type {
+        color: #0f0;
+      }
+    }
+  }
 </style>
