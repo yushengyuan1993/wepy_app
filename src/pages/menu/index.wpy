@@ -52,7 +52,7 @@
 
     methods = {
       onChange(e) {
-        console.log('index: '+e.detail)
+        console.log('index: ' + e.detail)
         if (e.detail === 1) {
           wx.navigateTo({
             url: 'home'
