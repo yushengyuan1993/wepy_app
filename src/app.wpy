@@ -16,8 +16,10 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/menu/index',
-      'pages/menu/home'
+      'pages/menu/video',
+      'pages/menu/picture',
+      'pages/menu/food',
+      'pages/menu/game'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -26,22 +28,34 @@ export default class extends wepy.app {
       navigationBarTextStyle: 'black'
     },
     tabBar: {
-      color: "#7A7E83",
-      selectedColor: "#3cc51f",
-      borderStyle: "black",
-      backgroundColor: "#ffffff",
+      color: '#7A7E83',
+      selectedColor: '#3cc51f',
+      borderStyle: 'black',
+      backgroundColor: '#ffffff',
       list: [
         {
-          pagePath: "pages/menu/index",
-          iconPath: "./static/icons/telescope0.png",
-          selectedIconPath: "./static/icons/telescope1.png",
-          text: "组件"
+          pagePath: 'pages/menu/video',
+          iconPath: './static/icons/telescope0.png',
+          selectedIconPath: './static/icons/telescope1.png',
+          text: '影视'
         },
         {
-          pagePath: "pages/menu/home",
-          iconPath: "./static/icons/earth0.png",
-          selectedIconPath: "./static/icons/earth1.png",
-          text: "接口"
+          pagePath: 'pages/menu/picture',
+          iconPath: './static/icons/picture0.png',
+          selectedIconPath: './static/icons/picture1.png',
+          text: '图片'
+        },
+        {
+          pagePath: 'pages/menu/food',
+          iconPath: './static/icons/food0.png',
+          selectedIconPath: './static/icons/food1.png',
+          text: '美食'
+        },
+        {
+          pagePath: 'pages/menu/game',
+          iconPath: './static/icons/game0.png',
+          selectedIconPath: './static/icons/game1.png',
+          text: '游戏'
         }
       ]
     }

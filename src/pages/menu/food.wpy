@@ -1,0 +1,46 @@
+  <template>
+  <view class="food">
+    美食
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Food extends wepy.page {
+    config = {
+      navigationBarTitleText: '美食'
+      // vant components
+      // usingComponents: {
+      //   'van-tab': '../../components/vant/tab/index',
+      //   'van-tabs': '../../components/vant/tabs/index'
+      // }
+    }
+    components = {
+
+    }
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>
+<style lang="less">
+  
+</style>
