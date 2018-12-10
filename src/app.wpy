@@ -24,6 +24,26 @@ export default class extends wepy.app {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      color: "#7A7E83",
+      selectedColor: "#3cc51f",
+      borderStyle: "black",
+      backgroundColor: "#ffffff",
+      list: [
+        {
+          pagePath: "pages/menu/index",
+          iconPath: "./static/icons/telescope0.png",
+          selectedIconPath: "./static/icons/telescope1.png",
+          text: "组件"
+        },
+        {
+          pagePath: "pages/menu/home",
+          iconPath: "./static/icons/earth0.png",
+          selectedIconPath: "./static/icons/earth1.png",
+          text: "接口"
+        }
+      ]
     }
   }
 
