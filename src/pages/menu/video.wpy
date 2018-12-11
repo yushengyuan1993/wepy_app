@@ -1,117 +1,8 @@
-<template>
-  <view class="video">
-    <!-- <van-tabs swipeable sticky active="0" animated> -->
-      <!-- <van-tab title="TOP100"> -->
-        <scroll-view
-          scroll-y="true"
-          style="height:{{scrollHeight}}px;"
-          bindscrolltolower="lower"
-          class="top"
-        >
-          <view class="item">
-            <view class="left">
-              <view class="img">
-                <image src="http://img1.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp"></image>
-              </view>
-              <view class="title">
-                <view>肖申克的救赎</view>
-                <view>The Shawshank Redemption</view>
-              </view>
-            </view>
-            <view class="right">
-              <view class="topic">
-                <view class="title">导演:</view>
-                <view class="txt">弗兰克·德拉邦特</view>
-              </view>
-              
-              <view class="topic">
-                <view class="title">演员:</view>
-                <view class="txt">蒂姆·罗宾斯</view>
-                <view class="txt">摩根·弗里曼</view>
-                <view class="txt">鲍勃·冈顿</view>
-              </view>
-
-              <view class="score">
-                <text class="l">评分:</text>
-                <text class="r">9.0</text>
-              </view>
-              <view class="datetime">
-                <text class="l">上映日期:</text>
-                <text class="r">1994</text>
-              </view>
-              <view class="tags">
-                <text class="tag">犯罪</text><text class="tag">剧情</text>
-              </view>
-            </view>
-          </view>
-        </scroll-view>
-      <!-- </van-tab> -->
-      <!-- <van-tab title="热映">热映</van-tab> -->
-    <!-- </van-tabs> -->
-  </view>
-</template>
-
-<script>
-  import wepy from 'wepy'
-
-  // import list from '../../static/js/top_50_films.js'
-
-  export default class Video extends wepy.page {
-    config = {
-      navigationBarTitleText: '影视'
-      // vant components
-      // usingComponents: {
-      //   'van-tab': '../../components/vant/tab/index',
-      //   'van-tabs': '../../components/vant/tabs/index'
-      // }
-    }
-    components = {
-
-    }
-
-    data = {
-      // top: null,
-      // scrollHeight: 0
-    }
-
-    computed = {
-
-    }
-
-    methods = {
-      // lower () {
-      //   console.log(+new Date)
-      // }
-    }
-
-    events = {
-
-    }
-
-    onLoad() {
-      // let that = this
-
-      // wx.getSystemInfo({
-      //   success: function(res){
-      //     console.log(res)
-      //     that.scrollHeight = res.windowHeight - 44
-      //   }
-      // })
-    }
-
-    onShow() {
-      // let data = list
-      // this.top = data
-      // console.log(this.top)
-    }
-  }
-</script>
-
 <style lang="less">
 .video {
   box-sizing: border-box;
   font-size: 0.8rem;
-  .top {
+  .film {
     .item {
       margin: 0.8rem;
       padding: 0.4rem;
@@ -137,23 +28,97 @@
         }
         >.title {
           position: absolute;
-          bottom: 0.4rem;
+          bottom: 0;
           >view {
-            padding: 0 0.3rem;
+            padding: 0.3rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.6);
+            color: #eee;
+            background-color: rgba(0, 0, 0, 0.8);
+            &:first-of-type {
+              padding-bottom: 0;
+            }
+            &:last-of-type {
+              padding-top: 0;
+            }
           }
         }
       }
       >.right {
+        position: relative;
+        font-size: 0.7rem;
         width: 45%;
         float: right;
         >.topic {
-          &:last-of-type {
-            margin-top: 0.4rem;
+          &:first-child {
+            margin-top: 0;
+          }
+          margin-top: 0.4rem;
+          .txt {
+            text-indent: 1em;
+            color: #666;
+          }
+        }
+        >.tags {
+          position: absolute;
+          bottom: 0;
+          color: #fff;
+          .tag {
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            margin-left: 0.4rem;
+            &:first-of-type {
+              margin-left: 0;
+            }
+            &:nth-of-type(2n) {
+              background-color: #26a2ff;
+            }
+            &:nth-of-type(2n+1) {
+              background-color: #4caf50;
+            }
+            &:nth-of-type(3n) {
+              background-color: #ffc107;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tv {
+    .item {
+      color: #f00;
+      display: inline-block;
+      width: 8.8rem;
+      margin: 0.8rem;
+      vertical-align: top;
+      &:nth-last-child(2n+1) {
+        margin-left: 0;
+      }
+      >.img {
+        image {
+          width: 100%;
+          height: 12.740741rem;
+        }
+      }
+      >.title {
+        >view {
+          &.name {
+            line-height: 1.142857rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .new {
+            display: inline-block;
+            width: 1.6rem;
+            height: 1.6rem;
+          }
+          .score {
+            display: inline-block;
+            vertical-align: top;
+            line-height: 1.6rem;
+            font-size: 0.8rem;
           }
         }
       }
@@ -161,3 +126,129 @@
   }
 }
 </style>
+<template>
+  <view class="video">
+    <van-tabs swipeable sticky active="1" animated>
+      <van-tab title="电影">
+        <scroll-view
+          scroll-y="true"
+          style="height:{{scrollHeight}}px;"
+          bindscrolltolower="lowerFilm"
+          class="film"
+        >
+          <view class="item" wx:for="{{film}}" wx:for-item="item">
+            <view class="left">
+              <view class="img">
+                <image src="{{item.images.small}}"></image>
+              </view>
+              <view class="title">
+                <view>{{item.title}}</view>
+                <view>{{item.original_title}}</view>
+              </view>
+            </view>
+            <view class="right">
+              <view class="topic">
+                <view class="title">导演:</view>
+                <view class="txt">{{item.directors[0].name}}</view>
+              </view>
+              
+              <view class="topic">
+                <view class="title">演员:</view>
+                <view class="txt" wx:for="{{item.casts}}" wx:for-item="cast">{{cast.name}}</view>
+              </view>
+
+              <view class="topic">
+                <view class="title">评分:</view>
+                <view class="txt">{{item.rating.average}}</view>
+              </view>
+              <view class="topic">
+                <view class="title">上映日期:</view>
+                <view class="txt">{{item.year}}</view>
+              </view>
+
+              <view class="tags">
+                <text class="tag" wx:for="{{item.genres}}" wx:for-index="idx" wx:for-item="genre">{{genre}}</text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </van-tab>
+      <van-tab title="电视">
+        <scroll-view
+          scroll-y="true"
+          style="height:{{scrollHeight}}px;"
+          bindscrolltolower="lowerTv"
+          class="tv"
+        >
+          <view class="item" wx:for="{{tv}}">
+            <view class="img">
+              <image src="{{item.cover}}"></image>
+            </view>
+            <view class="title">
+              <view class="name">{{item.title}}</view>
+              <view><view wx:if="{{!!item.is_new}}" class="new" style="background: url('../../static/icons/new.png') no-repeat center/100%"></view><text class="score">9.0</text></view>
+            </view>
+          </view>
+        </scroll-view>
+      </van-tab>
+    </van-tabs>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  import films from '../../static/js/files/top_15_films.js'
+  import tvs from '../../static/js/files/top_20_tv.js'
+
+  export default class Video extends wepy.page {
+    config = {
+      navigationBarTitleText: '影视',
+      // vant components
+      usingComponents: {
+        'van-tab': '../../components/vant/tab/index',
+        'van-tabs': '../../components/vant/tabs/index'
+      }
+    }
+    components = {
+
+    }
+
+    data = {
+      film: null,
+      tv: null,
+      scrollHeight: 0
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      lowerFilm () {
+        console.log(+new Date)
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      let that = this
+
+      wx.getSystemInfo({
+        success: function(res){
+          console.log(res)
+          that.scrollHeight = res.windowHeight - 44
+        }
+      })
+    }
+
+    onShow() {
+      let data = films[0].subjects
+      this.film = data
+      this.tv = tvs
+      // console.log('tvs: ' + tvs)
+    }
+  }
+</script>

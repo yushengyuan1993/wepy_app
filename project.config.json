@@ -6,6 +6,7 @@
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
+		"nodeModules": false,
 		"autoAudits": false,
 		"uglifyFileName": false
 	},
