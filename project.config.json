@@ -6,11 +6,13 @@
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
+		"autoAudits": false,
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
 	"appid": "wx901fb2f13d6ffbc8",
 	"projectname": "wepy_app",
 	"miniprogramRoot": "dist/",
+	"libVersion": "2.4.2",
 	"condition": {}
 }

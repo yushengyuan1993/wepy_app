@@ -1,6 +1,43 @@
 <template>
   <view class="picture">
-    图片
+    <scroll-view
+      scroll-y
+      style="height:{{scrollHeight}}px;"
+      bindscrolltolower="lower"
+    >
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+      <view>111</view>
+    </scroll-view>
   </view>
 </template>
 
@@ -21,7 +58,7 @@
     }
 
     data = {
-      
+      scrollHeight: 0
     }
 
     computed = {
@@ -29,7 +66,9 @@
     }
 
     methods = {
-      
+      lower () {
+        console.log(+ new Date)
+      }
     }
 
     events = {
@@ -37,7 +76,23 @@
     }
 
     onLoad() {
+      // wx.getSystemInfo({
+      //   success:function(res){
+      //     console.log(res);
+      //     this.scrollHeight = res.windowHeight;
+      //   }
+      // })
+    }
 
+    onShow () {
+      let that = this;
+
+      wx.getSystemInfo({
+        success:function(res){
+          console.log(res);
+          that.scrollHeight = res.windowHeight;
+        }
+      })
     }
   }
 </script>
