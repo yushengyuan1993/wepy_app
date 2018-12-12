@@ -94,6 +94,11 @@
       vertical-align: top;
       &:nth-last-child(2n+1) {
         margin-left: 0;
+        float: right;
+      }
+      &:nth-last-child(2n) {
+        margin-right: 0;
+        float: left;
       }
       >.img {
         image {
