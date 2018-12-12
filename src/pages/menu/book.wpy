@@ -1,19 +1,130 @@
-  <template>
+<style lang="less">
+.book {
+  >.item {
+    margin-top: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    background-color: #fffdfb;
+    &:last-of-type {
+      margin-bottom: 0.8rem;
+    }
+    >view {
+      display: inline-block;
+      height: 9rem;
+      vertical-align: top;
+    }
+    >.left {
+      width: 35%;
+      >.img {
+        >image {
+          width: 100%;
+          height: 9rem;
+        }
+      }
+    }
+    >.right {
+      width: 61%;
+      margin-left: 4%;
+      font-size: 0.8rem;
+      >.content {
+        height: 100%;
+        >.name {
+          line-height: 1.5rem;
+          font-size: 1rem;
+        }
+        >.author {
+          line-height: 1.25rem;
+          font-size: 0.75rem;
+          overflow: hidden;
+          text-overflow: hidden;
+          white-space: nowrap;
+          color: #999;
+          text {
+            color: #6699FF;
+          }
+        }
+        >.desc {
+          width: 100%;
+          height: 3.4rem;
+          margin: 0.2rem 0;
+          line-height: 1.2rem;
+          text-indent: 2em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: pre-wrap;
+          font-size: 0.7rem;
+          color: #666;
+        }
+        >.count {
+          line-height: 1.25rem;
+          font-size: 0.7rem;
+          color: #999;
+          >.word {
+            margin: 0 0.2rem;
+            color: #666;
+          }
+        }
+        >.kinds {
+          line-height: 1.25rem;
+          font-size: 0.6rem;
+          color: #999;
+          text {
+            margin-left: 0.3rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.2rem;
+            color: #fff;
+            &:nth-of-type(1) {
+              margin-left: 0;
+              background-color: #26a2ff;
+            }
+            &:nth-of-type(2) {
+              background-color: #4caf50;
+            }
+            &:nth-of-type(3) {
+              background-color: #ffc107;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+<template>
   <view class="book">
-    书籍
+    <view class="item" wx:for="{{book}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+      <view class="left">
+        <view class="img">
+          <image src="{{item.works.cover}}"></image>
+        </view>
+      </view>
+      <view class="right">
+        <view class="content">
+          <view class="name">{{item.works.title}}</view>
+
+          <view class="author" wx:if="{{item.works.origAuthor.length==0}}"><text>{{item.works.author[0].name}}</text> 著</view>
+          <view class="author" wx:else><text>{{item.works.origAuthor[0].name}}</text> 著</view>
+
+          <view class="desc">{{item.works.abstract}}</view>
+          <view class="count">约<text class="word">{{item.works.wordCount}}</text>字</view>
+          <view class="kinds">
+            <text class="tag" wx:for="{{item.works.kinds}}" wx:for-item="kind" wx:for-index="idx" wx:key="{{idx}}">{{kind.shortName}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
-
 <script>
   import wepy from 'wepy'
 
+  import books from '../../static/js/files/top_15_books.js'
+
   export default class Book extends wepy.page {
     config = {
-      navigationBarTitleText: '游戏'
+      navigationBarTitleText: '畅销书'
       // vant components
       // usingComponents: {
-      //   'van-tab': '../../components/vant/tab/index',
-      //   'van-tabs': '../../components/vant/tabs/index'
+      //   'van-card': '../../components/vant/card/index'
       // }
     }
     components = {
@@ -21,7 +132,7 @@
     }
 
     data = {
-
+      book: null
     }
 
     computed = {
@@ -29,7 +140,7 @@
     }
 
     methods = {
-
+      
     }
 
     events = {
@@ -39,8 +150,9 @@
     onLoad() {
 
     }
+
+    onShow() {
+      this.book = books
+    }
   }
 </script>
-<style lang="less">
-  
-</style>

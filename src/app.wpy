@@ -48,7 +48,7 @@ export default class extends wepy.app {
           pagePath: 'pages/menu/book',
           iconPath: './static/icons/book0.png',
           selectedIconPath: './static/icons/book1.png',
-          text: '书籍'
+          text: '畅销书'
         }
       ]
     }

@@ -156,7 +156,7 @@
           bindscrolltolower="lowerFilm"
           class="film"
         >
-          <view class="item" wx:for="{{film}}" wx:for-item="item">
+          <view class="item" wx:for="{{film}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
             <view class="left">
               <view class="img">
                 <image src="{{item.cover}}"></image>
@@ -174,7 +174,7 @@
               
               <view class="topic">
                 <view class="title">演员:</view>
-                <view class="txt" wx:for="{{item.casts}}" wx:for-item="cast">{{cast.name}}</view>
+                <view class="txt" wx:for="{{item.casts}}" wx:for-item="cast" wx:for-index="idx" wx:key="{{idx}}">{{cast.name}}</view>
               </view>
 
               <view class="topic">
@@ -187,7 +187,7 @@
               </view>
 
               <view class="tags">
-                <text class="tag" wx:for="{{item.genres}}" wx:for-index="idx" wx:for-item="genre">{{genre}}</text>
+                <text class="tag" wx:for="{{item.genres}}" wx:for-index="idx2" wx:for-item="genre" wx:key="{{idx2}}">{{genre}}</text>
               </view>
             </view>
           </view>
@@ -200,7 +200,7 @@
           bindscrolltolower="lowerTv"
           class="tv"
         >
-          <view class="item" wx:for="{{tv}}" data-rate="{{item.rate>=8?1:0}}">
+          <view class="item" wx:for="{{tv}}" wx:for-index="index" wx:key="{{index}}" data-rate="{{item.rate>=8?1:0}}">
             <view class="img">
               <image src="{{item.cover}}"></image>
             </view>

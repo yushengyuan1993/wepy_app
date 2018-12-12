@@ -1,4 +1,4 @@
-  <template>
+<template>
   <view class="food">
     美食
   </view>
