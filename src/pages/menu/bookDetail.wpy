@@ -1,0 +1,63 @@
+<template>
+  <view class="bookDetail">
+    书籍详情
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  import books from '../../static/js/files/top_15_books.js'
+
+  export default class BookDetail extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+      // vant components
+      // usingComponents: {
+      //   'van-tab': '../../components/vant/tab/index',
+      //   'van-tabs': '../../components/vant/tabs/index'
+      // }
+    }
+    components = {
+
+    }
+
+    data = {
+      book: null,
+      index: null,
+      currentBook: null
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad(o) {
+      // this.index = o.index
+
+      // this.currentBook = books[o.index]
+      this.currentBook = books[0]
+
+      wx.setNavigationBarTitle({
+        title: this.currentBook.works.title 
+      })
+
+      console.log(this.currentBook);
+    }
+
+    onShow(o) {
+      this.book = books
+    }
+  }
+</script>
+<style lang="less">
+  
+</style>

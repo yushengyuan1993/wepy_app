@@ -1,0 +1,50 @@
+<template>
+  <view class="template">
+    template
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Template extends wepy.page {
+    config = {
+      navigationBarTitleText: 'template'
+      // vant components
+      // usingComponents: {
+      //   'van-tab': '../../components/vant/tab/index',
+      //   'van-tabs': '../../components/vant/tabs/index'
+      // }
+    }
+    components = {
+
+    }
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+
+    onShow() {
+
+    }
+  }
+</script>
+<style lang="less">
+  
+</style>

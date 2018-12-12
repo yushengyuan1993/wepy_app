@@ -148,7 +148,7 @@
 </style>
 <template>
   <view class="video">
-    <van-tabs swipeable sticky active="{{active}}" animated color="{{color}}" bind:change="onChangeTab">
+    <van-tabs swipeable sticky active="0" animated color="{{color}}" bind:change="onChangeTab">
       <van-tab title="电影">
         <scroll-view
           scroll-y="true"
