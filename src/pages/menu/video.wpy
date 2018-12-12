@@ -157,7 +157,7 @@
           <view class="item" wx:for="{{film}}" wx:for-item="item">
             <view class="left">
               <view class="img">
-                <image src="{{item.images.small}}"></image>
+                <image src="{{item.cover}}"></image>
               </view>
               <view class="title">
                 <view>{{item.title}}</view>
