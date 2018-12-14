@@ -9,11 +9,13 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/menu/book',
-      'pages/menu/bookDetail',
       'pages/menu/video',
       'pages/menu/picture',
       'pages/menu/food',
+      'pages/menu/book',
+
+      'pages/menu/bookDetail',
+      'pages/menu/videoFilmDetail',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -56,7 +58,8 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    baseUrl: 'http://localhost:3003/'
   }
 
   constructor () {

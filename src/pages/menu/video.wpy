@@ -156,10 +156,10 @@
           bindscrolltolower="lowerFilm"
           class="film"
         >
-          <view class="item" wx:for="{{film}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+          <view class="item" wx:for="{{film}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}" bindtap="handleTapGetFilmDetail" data-id="{{index}}">
             <view class="left">
-              <view class="img">
-                <image src="{{item.cover}}"></image>
+              <view class="img" data-src="{{baseUrl}}">
+                <image src="{{baseUrl + 'images/videos/' + item.cover}}"></image>
               </view>
               <view class="title">
                 <view>{{item.title}}</view>
@@ -235,9 +235,12 @@
 
     data = {
       color: '#4caf50',
-      film: null,
+      film: [],
+      filmIndex: 1,
       tv: null,
-      scrollHeight: 0
+      scrollHeight: 0,
+
+      baseUrl: null
     }
 
     computed = {
@@ -247,16 +250,31 @@
     methods = {
       lowerFilm () {
         console.log('lowerFilm')
+        this.filmIndex = this.filmIndex + 5
+        this.getFilm(this.filmIndex)
       },
       lowerTv () {
         console.log('lowerTv')
       },
+
+      // 切换tab
       onChangeTab (e) {
         if (e.detail.index == 0) {
           this.color = '#4caf50'
         } else {
           this.color = '#ffc107'
         }
+      },
+
+      // 点击获取电影详情
+      handleTapGetFilmDetail (e) {
+        let i = e.currentTarget.dataset.id
+        wx.navigateTo({
+          url: `videoFilmDetail?index=${i}`,
+          complete: function (res) {
+            console.log(res);
+          }
+        })
       }
     }
 
@@ -264,22 +282,45 @@
 
     }
 
-    onLoad() {
+    onLoad(o) {
       let that = this
+
+      that.baseUrl = that.$parent.globalData.baseUrl
 
       wx.getSystemInfo({
         success: function(res){
-          console.log(res)
+          // console.log(res)
           that.scrollHeight = res.windowHeight - 44
         }
       })
+
+      that.filmIndex == 1 && that.getFilm(that.filmIndex)
     }
 
     onShow() {
-      let data = films[0].subjects
-      this.film = data
       this.tv = tvs
-      // console.log('tvs: ' + tvs)
+    }
+
+    getFilm (s) {
+      wx.request({
+        url: this.baseUrl + 'video/get-film',
+        method: 'POST',
+        data: {
+          "start": s,
+          "count": 5
+        },
+        header: {
+          'content-type':'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        success: res => {
+          let data = res.data
+
+          this.film = this.film.concat(data)
+
+          console.log(this.film);
+        }
+      })
     }
   }
 </script>

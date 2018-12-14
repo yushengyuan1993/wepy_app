@@ -37,7 +37,17 @@
     }
 
     onLoad() {
-
+      // wx.request({
+      //   url: 'http://localhost:3003/video/get-tv',
+      //   method: 'POST',
+      //   header: {
+      //     'content-type':'application/x-www-form-urlencoded',
+      //     'Accept': 'application/json'
+      //   },
+      //   success: res => {
+      //     console.log(res)
+      //   }
+      // })
     }
   }
 </script>

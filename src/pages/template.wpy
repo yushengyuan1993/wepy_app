@@ -1,15 +1,15 @@
 <template>
-  <view class="template">
-    template
+  <view class="component">
+    component
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
 
-  export default class Template extends wepy.page {
+  export default class Component extends wepy.page {
     config = {
-      navigationBarTitleText: 'template'
+      navigationBarTitleText: 'component'
       // vant components
       // usingComponents: {
       //   'van-tab': '../../components/vant/tab/index',

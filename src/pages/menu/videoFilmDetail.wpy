@@ -1,0 +1,72 @@
+<template>
+  <view class="videoFilmDetail">
+    videoFilmDetail
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class VideoFilmDetail extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+      // vant components
+      // usingComponents: {
+      //   'van-tab': '../../components/vant/tab/index',
+      //   'van-tabs': '../../components/vant/tabs/index'
+      // }
+    }
+    components = {
+
+    }
+
+    data = {
+      baseUrl: null,
+      detail: null
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad(o) {
+      this.baseUrl = this.$parent.globalData.baseUrl
+
+      console.log(o);
+
+      let start = o.index*1 + 1;
+      wx.request({
+        url: this.baseUrl + 'video/get-film',
+        method: 'POST',
+        data: {
+          start: start,
+          count: 1
+        },
+        header: {
+          'content-type':'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        success: res => {
+          this.detail = res.data;
+
+          console.log(this.detail);
+        }
+      })
+    }
+
+    onShow() {
+
+    }
+  }
+</script>
+<style lang="less">
+  
+</style>

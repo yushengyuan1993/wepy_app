@@ -183,7 +183,6 @@
     methods = {
       handleTap (e) {
         let i = e.currentTarget.dataset.id
-        console.log(i)
         wx.navigateTo({
           url: `bookDetail?index=${i}`,
           complete: function (res) {
@@ -198,7 +197,17 @@
     }
 
     onLoad() {
-
+      // wx.request({
+      //   url: 'http://localhost:3003/book/get-book',
+      //   method: 'POST',
+      //   header: {
+      //     'content-type':'application/x-www-form-urlencoded',
+      //     'Accept': 'application/json'
+      //   },
+      //   success: res => {
+      //     console.log(res)
+      //   }
+      // })
     }
 
     onShow() {
