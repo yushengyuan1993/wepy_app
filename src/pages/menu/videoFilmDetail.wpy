@@ -38,13 +38,13 @@
     }
 
     onLoad(o) {
-      this.baseUrl = this.$parent.globalData.baseUrl
+      let that = this;
 
-      console.log(o);
+      that.baseUrl = that.$parent.globalData.baseUrl
 
       let start = o.index*1 + 1;
       wx.request({
-        url: this.baseUrl + 'video/get-film',
+        url: that.baseUrl + 'video/get-film',
         method: 'POST',
         data: {
           start: start,
@@ -55,15 +55,22 @@
           'Accept': 'application/json'
         },
         success: res => {
-          this.detail = res.data;
+          that.detail = res.data[0];
 
-          console.log(this.detail);
+          that.setFilmData(res.data[0]);
         }
       })
     }
 
     onShow() {
 
+    }
+
+    setFilmData(info) {
+      console.log(info);
+      wx.setNavigationBarTitle({
+        title: info.title
+      })
     }
   }
 </script>

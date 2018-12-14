@@ -272,7 +272,7 @@
         wx.navigateTo({
           url: `videoFilmDetail?index=${i}`,
           complete: function (res) {
-            console.log(res);
+            // console.log(res);
           }
         })
       }
