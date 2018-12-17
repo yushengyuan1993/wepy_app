@@ -6,6 +6,8 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 
+// import api from './utils/wx.request'
+
 export default class extends wepy.app {
   config = {
     pages: [
@@ -59,6 +61,7 @@ export default class extends wepy.app {
 
   globalData = {
     userInfo: null,
+    // api: api,
     baseUrl: 'http://localhost:3003/'
   }
 

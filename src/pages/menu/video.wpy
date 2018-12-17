@@ -217,6 +217,8 @@
 <script>
   import wepy from 'wepy'
 
+  import api from '../../utils/wx.request'
+
   import films from '../../static/js/files/top_15_films.js'
   import tvs from '../../static/js/files/top_20_tv.js'
 
@@ -287,6 +289,14 @@
 
       that.baseUrl = that.$parent.globalData.baseUrl
 
+      // api.fetchRequest('video/get-film', {
+      //   start: 5,
+      //   count: 5
+      // })
+      // .then(res => {
+      //   console.log(res)
+      // })
+
       wx.getSystemInfo({
         success: function(res){
           // console.log(res)
@@ -317,8 +327,6 @@
           let data = res.data
 
           this.film = this.film.concat(data)
-
-          console.log(this.film);
         }
       })
     }
