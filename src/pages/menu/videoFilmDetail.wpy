@@ -7,6 +7,8 @@
 <script>
   import wepy from 'wepy'
 
+  import api from '../../utils/wx.request'
+
   export default class VideoFilmDetail extends wepy.page {
     config = {
       navigationBarTitleText: ''
@@ -38,38 +40,23 @@
     }
 
     onLoad(o) {
-      let that = this;
+      this.baseUrl = this.$parent.globalData.baseUrl
 
-      that.baseUrl = that.$parent.globalData.baseUrl
-
-      let start = o.index*1 + 1;
-      wx.request({
-        url: that.baseUrl + 'video/get-film',
-        method: 'POST',
-        data: {
-          start: start,
-          count: 1
-        },
-        header: {
-          'content-type':'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
-        },
-        success: res => {
-          that.detail = res.data[0];
-
-          that.setFilmData(res.data[0]);
-        }
-      })
+      let start = o.index*1 + 1
+      this.getFilmDetail(start)
     }
 
     onShow() {
 
     }
 
-    setFilmData(info) {
-      console.log(info);
+    async getFilmDetail(o) {
+      let res = await api.fetchRequest('video/get-film', {start: o, count: 1})
+
+      let data = res.data[0]
+
       wx.setNavigationBarTitle({
-        title: info.title
+        title: data.title
       })
     }
   }
