@@ -289,14 +289,6 @@
 
       that.baseUrl = that.$parent.globalData.baseUrl
 
-      // api.fetchRequest('video/get-film', {
-      //   start: 5,
-      //   count: 5
-      // })
-      // .then(res => {
-      //   console.log(res)
-      // })
-
       wx.getSystemInfo({
         success: function(res){
           // console.log(res)
@@ -311,24 +303,28 @@
       this.tv = tvs
     }
 
-    getFilm (s) {
-      wx.request({
-        url: this.baseUrl + 'video/get-film',
-        method: 'POST',
-        data: {
-          "start": s,
-          "count": 5
-        },
-        header: {
-          'content-type':'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
-        },
-        success: res => {
-          let data = res.data
+    async getFilm (s) {
+      // wx.request({
+      //   url: this.baseUrl + 'video/get-film',
+      //   method: 'POST',
+      //   data: {
+      //     "start": s,
+      //     "count": 5
+      //   },
+      //   header: {
+      //     'content-type':'application/x-www-form-urlencoded',
+      //     'Accept': 'application/json'
+      //   },
+      //   success: res => {
+      //     let data = res.data
 
-          this.film = this.film.concat(data)
-        }
-      })
+      //     this.film = this.film.concat(data)
+      //   }
+      // })
+
+      let res = await api.fetchRequest('video/get-film', {start: s, count: 5})
+
+      this.film = this.film.concat(res.data)
     }
   }
 </script>

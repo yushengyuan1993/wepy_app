@@ -93,7 +93,7 @@ function FetchRequest(url, data, method = 'POST', cache = 0) {
     function FetchError(err) {
       if (err) {
         wx.showToast({
-          title: err.errMsg || err.message,
+          title: err.errMsg || err.message || '服务器异常',
           icon: 'none',
           duration: 3000
         })
