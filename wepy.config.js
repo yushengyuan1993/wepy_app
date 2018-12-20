@@ -25,7 +25,8 @@ module.exports = {
     //   outputStyle: 'compressed'
     // },
     babel: {
-      sourceMap: true,
+      // sourceMap: true,
+      sourceMap: false,
       presets: [
         'env'
       ],
@@ -54,6 +55,7 @@ if (prod) {
     uglifyjs: {
       filter: /\.js$/,
       config: {
+        compress: {warnings: false}
       }
     },
     imagemin: {
