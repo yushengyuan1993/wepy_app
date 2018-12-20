@@ -1,6 +1,20 @@
 <template>
   <view class="videoFilmDetail">
-    videoFilmDetail
+    <view class="title" v-text="detail.title"></view>
+    <ul>
+      <li class="summary">
+        <view class="tip"><i></i>故事梗概<i></i></view>
+        <text>{{detail.summary}}</text>
+      </li>
+      <li class="casts">
+        <view class="tip"><i></i>导演<i></i></view>
+
+      </li>
+      <li class="directors">
+        <view class="tip"><i></i>主要演职员<i></i></view>
+
+      </li>
+    </ul>
   </view>
 </template>
 
@@ -30,6 +44,31 @@
     computed = {
 
     }
+    
+    onLoad(o) {
+      this.baseUrl = this.$parent.globalData.baseUrl
+
+      let start = o.index*1 + 1
+      this.getFilmDetail(start)
+    }
+
+    onShow() {
+      
+    }
+
+    async getFilmDetail(o) {
+      let res = await api.fetchRequest('video/get-film', {start: o, count: 1})
+
+      let data = res.data[0]
+
+      this.detail = data
+
+      wx.setNavigationBarTitle({
+        title: data.title
+      })
+
+      this.setPageDate(data)
+    }
 
     methods = {
 
@@ -39,28 +78,25 @@
 
     }
 
-    onLoad(o) {
-      this.baseUrl = this.$parent.globalData.baseUrl
-
-      let start = o.index*1 + 1
-      this.getFilmDetail(start)
-    }
-
-    onShow() {
-
-    }
-
-    async getFilmDetail(o) {
-      let res = await api.fetchRequest('video/get-film', {start: o, count: 1})
-
-      let data = res.data[0]
-
-      wx.setNavigationBarTitle({
-        title: data.title
-      })
+    setPageDate(o) {
+      console.log(o)
     }
   }
 </script>
 <style lang="less">
-  
+.videoFilmDetail {
+  >.title {
+
+  }
+  >ul {
+    >li {
+      >.tip {
+        text-align: center;
+        >i {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
 </style>

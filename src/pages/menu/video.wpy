@@ -2,12 +2,65 @@
 .video {
   box-sizing: border-box;
   font-size: 0.8rem;
+  background-color: #F2F2F2;
+  .popup_wrap {
+    >view {
+      >view {
+        padding: 1rem 0;
+        text-align: center;
+        border-bottom: 1px dotted #f2f2f2;
+        color: #666;
+        &:last-of-type {
+          border: none;
+        }
+        &[data-st="1"] {
+          color: #333;
+          background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAtFBMVEUAAACLa5+cY5yMa56Na56NapuNa5+NbJ6Na5+NbJ6Ma5+Na5+NbZ+PaaCMbJ+Na52Na56Na56MbJ+NbJ6MbJ+Na5+NbJ+NbJ6Na56Ma56NbJ+LbJ+Pa6GRbZ3teJmNbJ/yg6XugqWcb6CvcJ2ucJ2qcJ7reJmQbJ+abp+gbp7OdJvnd5rbdpqXbZ7Gc5zBcpy6cZzjd5rfd5rVdZrYfaTSe6Olb56UbZ6SbZ61cZ3rgaXqgaSfeFE8AAAAHnRSTlMAHQP99gzX5sWDe1xALNvv6+jNvLCom5J3cW5LORVADtCJAAABF0lEQVRYw+2WR47CUBBExzY2YYDJeXCRHDA5p/vfCyMh1b56AUh+Byipn9v966Gg4HZxa0Gz5hoCqsipOHpAGetVipe6HAC024cI3rchIGcKvPuWgHC5RbOhBnS6QH8+QOnRENAL4z3w6csjnMkSvDqWgHCU4unPEhAO+/CqribxEjFN8NbSJF5YjlH+F0Yg8w28XyGAxDPgwxcCSLZD0BAkksV5LQWJJO4BX64wApkkqDhCABmN8VwXAsgwQslRJFJEhB9FImGAPoJFYipIFD4jJWqLRInKKtt/JvvvbD8olCifNErkUTWc9Yhn/RoPy4RPmyBRfFwpkcunjZBZCkbOzFZxjixZes2zFk1T1Q3yqltQcEecAKt6YbQJCWNgAAAAAElFTkSuQmCC') no-repeat 1rem center/14%;
+        }
+      }
+    }
+  }
   .film {
+    .section {
+      height: 2.514286rem;
+      >view {
+        display: inline-block;
+        height: 100%;
+        &.nav {
+          width: 25%;
+          text-align: right;
+          >text {
+            display: inline-block;
+            min-width: 60%;
+            text-align: center;
+            padding: 0 0.6rem;
+            margin-top: 0.628571rem;
+            height: 1.428571rem;
+            line-height: 1.428571rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            color: #666;
+            background-color: #fff;
+          }
+        }
+        &.search {
+          float: right;
+          width: 60%;
+          max-width: 75%;
+          transition: width 0.2s ease-out;
+          &[data-st="1"] {
+            width: 75%;
+          }
+        }
+      }
+    }
     .item {
-      margin: 0.8rem;
-      padding: 0.4rem;
-      border-radius: 0.3rem;
-      background-color: #eee;
+      margin: 0.8rem 0;
+      padding: 0.8rem 0.4rem;
+      background-color: #fff;
+      &[data-id="0"] {
+        margin-top: 0.3rem;
+      }
       >view {
         display: inline-block;
         width: 50%;
@@ -63,7 +116,7 @@
         }
         >.tags {
           position: absolute;
-          bottom: 0;
+          bottom: 0.2rem;
           color: #fff;
           .tag {
             padding: 0.2rem 0.4rem;
@@ -156,6 +209,22 @@
           bindscrolltolower="lowerFilm"
           class="film"
         >
+          <view class="section">
+            <view class="nav"><text bindtap="handleShowPopup">{{btnText}}</text></view>
+            <view class="search" data-st="{{searchStatus}}">
+              <van-search 
+              use-action-slot 
+              show-action="{{true}}"
+              value="{{ searchValue }}" 
+              placeholder="请输入电影名称"
+              bind:change="onChange"
+              bind:focus="focusSearch"
+              bind:blur="blurSearch"
+              >
+              <view slot="action" bind:tap="onSearch">搜索</view>
+              </van-search>
+            </view>
+          </view>
           <view class="item" wx:for="{{film}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}" bindtap="handleTapGetFilmDetail" data-id="{{index}}">
             <view class="left">
               <view class="img" data-src="{{baseUrl}}">
@@ -212,6 +281,16 @@
         </scroll-view>
       </van-tab>
     </van-tabs>
+      
+    <van-popup show="{{ showPupop }}" bind:close="onClose" overlay="{{true}}"
+      custom-style="border-radius: 0.4rem; width: 12rem"
+    >
+      <view class="popup_wrap">
+        <view bindtap="selectTopic">
+          <view wx:for="{{popupArr}}" wx:key="{{index}}" data-st="{{item.st}}" data-id="{{index}}" class="popup_list">{{item.text}}</view>
+        </view>
+      </view>
+    </van-popup>
   </view>
 </template>
 <script>
@@ -219,7 +298,6 @@
 
   import api from '../../utils/wx.request'
 
-  import films from '../../static/js/files/top_15_films.js'
   import tvs from '../../static/js/files/top_20_tv.js'
 
   export default class Video extends wepy.page {
@@ -228,7 +306,9 @@
       // vant components
       usingComponents: {
         'van-tab': '../../components/vant/tab/index',
-        'van-tabs': '../../components/vant/tabs/index'
+        'van-tabs': '../../components/vant/tabs/index',
+        "van-search": "../../components/vant/search/index",
+        "van-popup": "../../components/vant/popup/index"
       }
     }
     components = {
@@ -241,6 +321,18 @@
       filmIndex: 1,
       tv: null,
       scrollHeight: 0,
+      cloudLowerFilm: true,
+      btnText: '筛选',
+      popupArr: [
+        {text: '1-50', st: 0},
+        {text: '51-100', st: 0},
+        {text: '101-150', st: 0},
+        {text: '151-200', st: 0},
+        {text: '201-250', st: 0}
+      ],
+      searchStatus: 0,
+      searchValue: null,
+      showPupop: false,
 
       baseUrl: null
     }
@@ -251,9 +343,10 @@
 
     methods = {
       lowerFilm () {
-        console.log('lowerFilm')
-        this.filmIndex = this.filmIndex + 5
-        this.getFilm(this.filmIndex)
+        if (this.cloudLowerFilm) {
+          this.filmIndex = this.filmIndex + 5
+          this.getFilm(this.filmIndex)
+        }
       },
       lowerTv () {
         console.log('lowerTv')
@@ -303,28 +396,89 @@
       this.tv = tvs
     }
 
-    async getFilm (s) {
-      // wx.request({
-      //   url: this.baseUrl + 'video/get-film',
-      //   method: 'POST',
-      //   data: {
-      //     "start": s,
-      //     "count": 5
-      //   },
-      //   header: {
-      //     'content-type':'application/x-www-form-urlencoded',
-      //     'Accept': 'application/json'
-      //   },
-      //   success: res => {
-      //     let data = res.data
+    getFilm (s) {
+      let that = this
+      /*
+      wx.request({
+        url: this.baseUrl + 'video/get-film',
+        method: 'POST',
+        data: {
+          "start": s,
+          "count": 5
+        },
+        header: {
+          'content-type':'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        success: res => {
+          let data = res.data
 
-      //     this.film = this.film.concat(data)
-      //   }
-      // })
+          this.film = this.film.concat(data)
+        }
+      })
+      */
 
-      let res = await api.fetchRequest('video/get-film', {start: s, count: 5})
+      let p = api.fetchRequest('video/get-film', {start: s, count: 5})
+      p.then(o => {
+        let res = o.data
+        if (res.length > 0) {
+          let data = that.film.concat(res)
+          that.film = data
+          // this.$apply()
+        } else {
+          console.warn('暂无数据')
+        }
+      })
+      p.catch(() => {
+        console.error('服务器内部错误')
+      })
+    }
 
-      this.film = this.film.concat(res.data)
+    handleShowPopup () {
+      this.showPupop = true
+    }
+    selectTopic(e) {
+      let id = e.target.dataset.id
+
+      this.popupArr.forEach((el, i) => {
+        if ( i === id) {
+          el.st = 1
+          this.btnText = el.text
+        } else {
+          el.st = 0
+        }
+      })
+
+      let start = id*50 + 1
+      this.showPupop = false
+
+      let p = api.fetchRequest('video/get-film', {start, count: 50})
+      p.then(o => {
+        let data = o.data
+        if (data.length > 0) {
+          this.setData({
+            film: data
+          })
+          this.cloudLowerFilm = false
+        } else {
+          console.warn('暂无数据')
+        }
+      })
+      p.catch(() => {
+        console.error('服务器内部错误')
+      })
+    }
+    onChange(o) {
+      this.searchValue = o.detail
+    }
+    onSearch (o) {
+      let v = this.searchValue
+    }
+    focusSearch () {
+      this.searchStatus = 1
+    }
+    blurSearch () {
+      this.searchStatus = 0
     }
   }
 </script>

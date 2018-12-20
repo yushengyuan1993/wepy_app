@@ -61,7 +61,7 @@ export default class extends wepy.app {
 
   globalData = {
     userInfo: null,
-    baseUrl: 'http://localhost:3003/'
+    baseUrl: 'https://miniapi.yvshare.cn/'
   }
 
   constructor () {
