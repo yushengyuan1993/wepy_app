@@ -1,6 +1,5 @@
 <template>
   <view class="videoFilmDetail">
-    <view class="title" v-text="detail.title"></view>
     <ul>
       <li class="summary">
         <view class="tip"><i></i>故事梗概<i></i></view>
@@ -61,12 +60,6 @@
 
       let data = res.data[0]
 
-      this.detail = data
-
-      wx.setNavigationBarTitle({
-        title: data.title
-      })
-
       this.setPageDate(data)
     }
 
@@ -79,7 +72,11 @@
     }
 
     setPageDate(o) {
-      console.log(o)
+      this.detail = o
+
+      wx.setNavigationBarTitle({
+        title: o.title
+      })
     }
   }
 </script>
@@ -90,6 +87,12 @@
   // }
   >ul {
     >li {
+      &.summary {
+        >text {
+          font-size: 0.6rem;
+          color: #999;
+        }
+      }
       >.tip {
         text-align: center;
         >i {

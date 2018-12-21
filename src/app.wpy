@@ -20,7 +20,7 @@ export default class extends wepy.app {
       'pages/menu/videoFilmDetail',
     ],
     window: {
-      backgroundTextStyle: 'dark',
+      backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black',
@@ -75,7 +75,8 @@ export default class extends wepy.app {
 
   globalData = {
     userInfo: null,
-    baseUrl: 'https://miniapi.yvshare.cn/'
+    // baseUrl: 'https://miniapi.yvshare.cn/',
+    baseUrl: 'http://localhost:3003/',
   }
 
   constructor () {

@@ -1,3 +1,89 @@
+<template>
+  <view class="book">
+    <view class="item" wx:for="{{book}}" data-id="{{index}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}" bindtap="handleTap">
+      <view class="left">
+        <view class="img">
+          <image src="{{item.works.cover}}"></image>
+        </view>
+      </view>
+      <view class="right">
+        <text class="rank">{{item.currentRank}}</text>
+        <view class="content">
+          <view class="name">{{item.works.title}}</view>
+
+          <view class="author" wx:if="{{item.works.origAuthor.length==0}}"><text>{{item.works.author[0].name}}</text> 著</view>
+          <view class="author" wx:else><text>{{item.works.origAuthor[0].name}}</text> 著</view>
+
+          <view class="desc">{{item.works.abstract}}</view>
+          <view class="count">约<text class="word">{{item.works.wordCount}}</text>字</view>
+          <view class="kinds">
+            <text class="tag" wx:for="{{item.works.kinds}}" wx:for-item="kind" wx:for-index="idx" wx:key="{{idx}}">{{kind.shortName}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  import books from '../../static/js/files/top_15_books.js'
+
+  export default class Book extends wepy.page {
+    config = {
+      navigationBarTitleText: '畅销书'
+      // vant components
+      // usingComponents: {
+      //   'van-card': '../../components/vant/card/index'
+      // }
+    }
+    components = {
+
+    }
+
+    data = {
+      book: null
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      handleTap (e) {
+        let i = e.currentTarget.dataset.id
+        wx.navigateTo({
+          url: `bookDetail?index=${i}`,
+          complete: function (res) {
+            console.log(res);
+          }
+        })
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      // wx.request({
+      //   url: 'http://localhost:3003/book/get-book',
+      //   method: 'POST',
+      //   header: {
+      //     'content-type':'application/x-www-form-urlencoded',
+      //     'Accept': 'application/json'
+      //   },
+      //   success: res => {
+      //     console.log(res)
+      //   }
+      // })
+    }
+
+    onShow() {
+      this.book = books
+    }
+  }
+</script>
 <style lang="less">
 .book {
   >.item {
@@ -129,89 +215,3 @@
   }
 }
 </style>
-<template>
-  <view class="book">
-    <view class="item" wx:for="{{book}}" data-id="{{index}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}" bindtap="handleTap">
-      <view class="left">
-        <view class="img">
-          <image src="{{item.works.cover}}"></image>
-        </view>
-      </view>
-      <view class="right">
-        <text class="rank">{{item.currentRank}}</text>
-        <view class="content">
-          <view class="name">{{item.works.title}}</view>
-
-          <view class="author" wx:if="{{item.works.origAuthor.length==0}}"><text>{{item.works.author[0].name}}</text> 著</view>
-          <view class="author" wx:else><text>{{item.works.origAuthor[0].name}}</text> 著</view>
-
-          <view class="desc">{{item.works.abstract}}</view>
-          <view class="count">约<text class="word">{{item.works.wordCount}}</text>字</view>
-          <view class="kinds">
-            <text class="tag" wx:for="{{item.works.kinds}}" wx:for-item="kind" wx:for-index="idx" wx:key="{{idx}}">{{kind.shortName}}</text>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-</template>
-<script>
-  import wepy from 'wepy'
-
-  import books from '../../static/js/files/top_15_books.js'
-
-  export default class Book extends wepy.page {
-    config = {
-      navigationBarTitleText: '畅销书'
-      // vant components
-      // usingComponents: {
-      //   'van-card': '../../components/vant/card/index'
-      // }
-    }
-    components = {
-
-    }
-
-    data = {
-      book: null
-    }
-
-    computed = {
-
-    }
-
-    methods = {
-      handleTap (e) {
-        let i = e.currentTarget.dataset.id
-        wx.navigateTo({
-          url: `bookDetail?index=${i}`,
-          complete: function (res) {
-            console.log(res);
-          }
-        })
-      }
-    }
-
-    events = {
-
-    }
-
-    onLoad() {
-      // wx.request({
-      //   url: 'http://localhost:3003/book/get-book',
-      //   method: 'POST',
-      //   header: {
-      //     'content-type':'application/x-www-form-urlencoded',
-      //     'Accept': 'application/json'
-      //   },
-      //   success: res => {
-      //     console.log(res)
-      //   }
-      // })
-    }
-
-    onShow() {
-      this.book = books
-    }
-  }
-</script>

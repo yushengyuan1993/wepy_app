@@ -216,7 +216,7 @@
               use-action-slot 
               show-action="{{true}}"
               value="{{ searchValue }}" 
-              placeholder="请输入电影名称"
+              placeholder="搜索电影"
               bind:change="onChange"
               bind:focus="focusSearch"
               bind:blur="blurSearch"
@@ -238,7 +238,7 @@
             <view class="right">
               <view class="topic">
                 <view class="title">导演:</view>
-                <view class="txt">{{item.directors[0].name}}</view>
+                <view class="txt" wx:for="{{item.directors}}" wx:for-item="director" wx:for-index="directorIdx" wx:key="{{directorIdx}}">{{director.name}}</view>
               </view>
               
               <view class="topic">
@@ -359,6 +359,8 @@
         } else {
           this.color = '#ffc107'
         }
+
+        console.log(this.film)
       },
 
       // 点击获取电影详情
@@ -422,9 +424,14 @@
       p.then(o => {
         let res = o.data
         if (res.length > 0) {
-          let data = that.film.concat(res)
+          let data = that.film
+          res.forEach(el => {
+            data.push(el)
+          })
+          // that.setData({
+          //   film: data
+          // })
           that.film = data
-          // this.$apply()
         } else {
           console.warn('暂无数据')
         }
@@ -438,28 +445,31 @@
       this.showPupop = true
     }
     selectTopic(e) {
+      let that = this
       let id = e.target.dataset.id
 
-      this.popupArr.forEach((el, i) => {
+      that.popupArr.forEach((el, i) => {
         if ( i === id) {
           el.st = 1
-          this.btnText = el.text
+          that.btnText = el.text
         } else {
           el.st = 0
         }
       })
 
       let start = id*50 + 1
-      this.showPupop = false
+      that.showPupop = false
 
       let p = api.fetchRequest('video/get-film', {start, count: 50})
       p.then(o => {
         let data = o.data
         if (data.length > 0) {
-          this.setData({
-            film: data
-          })
-          this.cloudLowerFilm = false
+          // that.setData({
+          //   film: data
+          // })
+          that.film = data
+          that.cloudLowerFilm = false
+          that.$apply()
         } else {
           console.warn('暂无数据')
         }
@@ -472,7 +482,30 @@
       this.searchValue = o.detail
     }
     onSearch (o) {
-      let v = this.searchValue
+      let title = this.searchValue
+      if (!title || !title.trim()) {
+        // wx.showToast({
+        //   title: err.errMsg || err.message || '服务器异常',
+        //   icon: 'none',
+        //   duration: 3000
+        // })
+        return;
+      }
+
+      let p = api.fetchRequest('video/search-film', {title})
+      p.then(o => {
+        let data = o.data
+        if (data.length > 0) {
+          this.film = data
+          this.cloudLowerFilm = false
+          this.$apply()
+        } else {
+          console.warn('暂无数据')
+        }
+      })
+      p.catch(() => {
+        console.error('服务器内部错误')
+      })
     }
     focusSearch () {
       this.searchStatus = 1
