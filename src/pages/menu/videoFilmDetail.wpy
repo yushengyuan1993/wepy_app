@@ -91,7 +91,7 @@
     // 设置页面数据
     setPageDate(o) {
       this.detail = o
-
+      console.log(this.detail)
       wx.setNavigationBarTitle({
         title: o.title
       })
@@ -131,7 +131,7 @@
       >.list {
         >.item {
           display: inline-block;
-          height: 12rem;
+          height: 14rem;
           width: 50%;
           >.avatar {
             position: relative;
