@@ -1,0 +1,45 @@
+<template>
+  <view class="subtest">
+    subtest
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Subtest extends wepy.page {
+    config = {
+      navigationBarTitleText: 'subtest'
+    }
+    components = {
+
+    }
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+
+    onShow() {
+
+    }
+  }
+</script>
+<style lang="less">
+  
+</style>

@@ -19,7 +19,7 @@ module.exports = {
   compilers: {
     less: {
       compress: true,
-      plugins: [new LessPluginAutoPrefix({browsers: ['Android >= 2.3', 'Chrome > 20', 'iOS >= 6']})]
+      plugins: [new LessPluginAutoPrefix({browsers: ['Android >= 4.1', 'Chrome > 20', 'iOS >= 8']})]
     },
     // sass: {
     //   outputStyle: 'compressed'

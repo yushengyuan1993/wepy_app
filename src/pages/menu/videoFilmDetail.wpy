@@ -85,9 +85,9 @@
 </script>
 <style lang="less">
 .videoFilmDetail {
-  >.title {
+  // >.title {
 
-  }
+  // }
   >ul {
     >li {
       >.tip {

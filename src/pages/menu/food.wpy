@@ -1,6 +1,6 @@
 <template>
   <view class="food">
-    美食
+    <view bindtap="handleClick">美食</view>
   </view>
 </template>
 
@@ -29,7 +29,14 @@
     }
 
     methods = {
-
+      handleClick () {
+        wx.navigateTo({
+          url: `../../packageA/pages/subtest?index=1`,
+          complete: function (res) {
+            console.log(res);
+          }
+        })
+      }
     }
 
     events = {

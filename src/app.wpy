@@ -20,11 +20,17 @@ export default class extends wepy.app {
       'pages/menu/videoFilmDetail',
     ],
     window: {
-      backgroundTextStyle: 'light',
+      backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTitleText: '你好',
+      navigationBarTextStyle: 'black',
+      enablePullDownRefresh: true,
     },
+    networkTimeout: {
+      request: 80000,
+      downloadFile: 80000
+    },
+    debug: true,
     tabBar: {
       color: '#7A7E83',
       selectedColor: '#4caf50',
@@ -56,7 +62,15 @@ export default class extends wepy.app {
           text: '畅销书'
         }
       ]
-    }
+    },
+    subpackages: [
+      {
+        root: "packageA",
+        pages: [
+          'pages/subtest',
+        ]
+      }
+    ]
   }
 
   globalData = {
