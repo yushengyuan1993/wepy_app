@@ -1,19 +1,35 @@
 <template>
   <view class="videoFilmDetail">
-    <ul>
-      <li class="summary">
+    <view>
+      <view class="summary">
         <view class="tip"><i></i>故事梗概<i></i></view>
-        <text>{{detail.summary}}</text>
-      </li>
-      <li class="casts">
+        <view class="text">{{detail.summary}}</view>
+      </view>
+      <view class="directors">
         <view class="tip"><i></i>导演<i></i></view>
-
-      </li>
-      <li class="directors">
+        <view class="list">
+          <view class="item" wx:for="{{detail.directors}}" wx:for-item="director" wx:for-index="director_index" wx:key="{{director_index}}">
+            <view class="avatar">
+              <image src="{{baseUrl + 'images/avatars/' + director.avatar}}"></image>
+              <text class="name">{{director.name}}</text>
+            </view>
+            <view class="name"></view>
+          </view>
+        </view>
+      </view>
+      <view class="casts">
         <view class="tip"><i></i>主要演职员<i></i></view>
-
-      </li>
-    </ul>
+        <view class="list">
+          <view class="item" wx:for="{{detail.casts}}" wx:for-item="cast" wx:for-index="cast_index" wx:key="{{cast_index}}">
+            <view class="avatar">
+              <image src="{{baseUrl + 'images/avatars/' + cast.avatar}}"></image>
+              <text class="name">{{cast.name}}</text>
+            </view>
+            <view class="name"></view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -55,6 +71,7 @@
       
     }
 
+    // 获取详情数据
     async getFilmDetail(o) {
       let res = await api.fetchRequest('video/get-film', {start: o, count: 1})
 
@@ -71,6 +88,7 @@
 
     }
 
+    // 设置页面数据
     setPageDate(o) {
       this.detail = o
 
@@ -82,21 +100,60 @@
 </script>
 <style lang="less">
 .videoFilmDetail {
+  padding: 0 1rem;
   // >.title {
 
   // }
-  >ul {
-    >li {
+  >view {
+    >view {
+      &:nth-of-type(2), &:nth-of-type(3) {
+        margin-top: 0.4rem;
+        border-top: 1px dashed #f2f2f2;
+      }
       &.summary {
-        >text {
-          font-size: 0.6rem;
+        >.text {
+          text-indent: 2em;
+          text-align: justify;
+          line-height: 2;
+          font-size: 0.7rem;
           color: #999;
         }
       }
       >.tip {
+        padding: 0.8rem 0 0.4rem;
+        color: #666;
+        font-size: 0.8rem;
         text-align: center;
         >i {
           display: inline-block;
+        }
+      }
+      >.list {
+        >.item {
+          display: inline-block;
+          height: 12rem;
+          width: 50%;
+          >.avatar {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            image {
+              width: 93.5%;
+              height: 93.5%;
+              margin: 3%;
+              vertical-align: top;
+            }
+            .name {
+              position: absolute;
+              left: 3%;
+              bottom: 4%;
+              width: 87%;
+              padding: 0.3rem;
+              font-size: 0.6rem;
+              color: #999;
+              background-color: rgba(0, 0, 0, 0.6);
+            }
+          }
         }
       }
     }

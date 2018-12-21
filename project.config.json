@@ -11,7 +11,7 @@
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
-	"appid": "wx901fb2f13d6ffbc8",
+	"appid": "wxcc7df82ced5ff24e",
 	"projectname": "wepy_app",
 	"miniprogramRoot": "dist/",
 	"libVersion": "2.4.2",

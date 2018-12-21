@@ -24,13 +24,13 @@ export default class extends wepy.app {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black',
-      enablePullDownRefresh: true,
+      // enablePullDownRefresh: true,
     },
     networkTimeout: {
       request: 80000,
       downloadFile: 80000
     },
-    debug: false,
+    // debug: false,
     tabBar: {
       color: '#7A7E83',
       selectedColor: '#4caf50',
@@ -75,8 +75,8 @@ export default class extends wepy.app {
 
   globalData = {
     userInfo: null,
-    // baseUrl: 'https://miniapi.yvshare.cn/',
-    baseUrl: 'http://localhost:3003/',
+    baseUrl: 'https://miniapi.yvshare.cn/',
+    // baseUrl: 'http://localhost:3003/',
   }
 
   constructor () {
