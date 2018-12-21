@@ -22,7 +22,7 @@ export default class extends wepy.app {
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '你好',
+      navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black',
       enablePullDownRefresh: true,
     },
@@ -30,7 +30,7 @@ export default class extends wepy.app {
       request: 80000,
       downloadFile: 80000
     },
-    debug: true,
+    debug: false,
     tabBar: {
       color: '#7A7E83',
       selectedColor: '#4caf50',
